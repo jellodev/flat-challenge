@@ -1004,30 +1004,51 @@ function drawBottle(g) {
   ctx.closePath();
   const glass = ctx.createLinearGradient(0, -bodyW / 2, 0, bodyW / 2);
   if (game.golden) {
-    glass.addColorStop(0, "#fff1a8");
-    glass.addColorStop(0.5, "#ffd23f");
-    glass.addColorStop(1, "#e0a800");
+    glass.addColorStop(0, "rgba(255, 241, 168, 0.9)");
+    glass.addColorStop(1, "rgba(224, 168, 0, 0.9)");
   } else {
-    glass.addColorStop(0, "#ffffff");
-    glass.addColorStop(0.5, "#e4f6fb");
-    glass.addColorStop(1, "#c4e6f0");
+    glass.addColorStop(0, "rgba(255, 255, 255, 0.75)");
+    glass.addColorStop(0.5, "rgba(255, 255, 255, 0.45)");
+    glass.addColorStop(1, "rgba(235, 242, 245, 0.7)");
   }
   ctx.fillStyle = glass;
   ctx.fill();
-  ctx.strokeStyle = "#222";
-  ctx.lineWidth = 3;
+  ctx.strokeStyle = "#fff";
+  ctx.lineWidth = 3.5;
+  ctx.lineJoin = "round";
   ctx.stroke();
-  ctx.fillStyle = "#222";
-  ctx.fillRect(-3, -neckW / 2 - 1, 6, neckW + 2);
-  const labelX = shoulder + length * 0.12;
-  const labelW = length * 0.36;
-  ctx.fillStyle = game.golden ? "#222" : "#fffaf0";
-  ctx.fillRect(labelX, -bodyW / 2 + 2, labelW, bodyW - 4);
-  ctx.lineWidth = 2;
-  ctx.strokeRect(labelX, -bodyW / 2 + 2, labelW, bodyW - 4);
-  ctx.fillStyle = game.golden ? "#ffd23f" : "#7fd3f7";
-  ctx.fillRect(labelX + labelW * 0.2, -bodyW / 2 + 2, labelW * 0.12, bodyW - 4);
-  ctx.fillRect(labelX + labelW * 0.68, -bodyW / 2 + 2, labelW * 0.12, bodyW - 4);
+  ctx.beginPath();
+  ctx.moveTo(shoulder + length * 0.08, -bodyW * 0.32);
+  ctx.lineTo(length * 0.94, -bodyW * 0.32);
+  ctx.strokeStyle = "rgba(255, 255, 255, 0.95)";
+  ctx.lineWidth = Math.max(2, bodyW * 0.07);
+  ctx.lineCap = "round";
+  ctx.stroke();
+  ctx.fillStyle = "#d9ae3c";
+  ctx.strokeStyle = "#a9831f";
+  ctx.lineWidth = 1.5;
+  ctx.fillRect(-2, -neckW / 2 - 2, length * 0.09, neckW + 4);
+  ctx.strokeRect(-2, -neckW / 2 - 2, length * 0.09, neckW + 4);
+  const labelX = length * 0.6;
+  const labelW = length * 0.33;
+  ctx.fillStyle = "#fffdf8";
+  ctx.strokeStyle = "rgba(0, 0, 0, 0.12)";
+  ctx.lineWidth = 1;
+  ctx.fillRect(labelX, -bodyW / 2 + 2.5, labelW, bodyW - 5);
+  ctx.strokeRect(labelX, -bodyW / 2 + 2.5, labelW, bodyW - 5);
+  ctx.strokeStyle = "rgba(60, 60, 60, 0.45)";
+  ctx.lineWidth = 1.2;
+  ctx.lineCap = "butt";
+  ctx.beginPath();
+  for (const [at, span] of [[0.12, 0.22], [0.2, 0.32], [0.82, 0.3], [0.9, 0.18]]) {
+    ctx.moveTo(labelX + labelW * at, -bodyW * span);
+    ctx.lineTo(labelX + labelW * at, bodyW * span);
+  }
+  ctx.stroke();
+  ctx.beginPath();
+  ctx.arc(labelX + labelW * 0.5, 0, bodyW * 0.17, 0, Math.PI * 2);
+  ctx.fillStyle = "#d8283a";
+  ctx.fill();
   ctx.restore();
 }
 
