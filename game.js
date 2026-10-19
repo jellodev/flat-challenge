@@ -13,7 +13,7 @@ const SUBSTEPS = 4;
 const ENDING_HTML = `
   <p class="eyebrow">ALL CLEAR!</p>
   <h2>골무에 볼록이라니…<br>사람 맞나요?</h2>
-  <p class="lead">그런데 혹시, 따르던 병 라벨<br>눈치채셨나요? <b>璄</b><br>진짜 한 잔은 여기 있어요.</p>
+  <p class="lead">연습은 여기까지.<br>이제 <b>진짜 한 잔</b>을 따를 차례예요.</p>
   <a class="primary" href="${KYUNG_URL}" rel="noopener">진짜 한 잔 보러 가기 →</a>
   <p class="countdown"></p>
   <button class="ghost">자랑부터 하고 갈래요</button>
@@ -877,8 +877,8 @@ function liquidStyle(g, top) {
     grad.addColorStop(0, "rgba(90, 170, 255, 0.75)");
     grad.addColorStop(1, "rgba(60, 140, 240, 0.85)");
   } else {
-    grad.addColorStop(0, "rgba(200, 238, 250, 0.85)");
-    grad.addColorStop(1, "rgba(160, 222, 244, 0.85)");
+    grad.addColorStop(0, "rgba(110, 200, 236, 0.8)");
+    grad.addColorStop(1, "rgba(70, 170, 220, 0.85)");
   }
   return grad;
 }
@@ -918,7 +918,7 @@ function drawLiquid(g) {
   ctx.moveTo(g.cx + half, surf + tiltPx);
   surfacePath(g, half, surf, tiltPx, domePx);
   ctx.strokeStyle = "#fff";
-  ctx.lineWidth = 2.5;
+  ctx.lineWidth = 3;
   ctx.stroke();
   ctx.restore();
 }
@@ -1025,15 +1025,9 @@ function drawBottle(g) {
   ctx.fillRect(labelX, -bodyW / 2 + 2, labelW, bodyW - 4);
   ctx.lineWidth = 2;
   ctx.strokeRect(labelX, -bodyW / 2 + 2, labelW, bodyW - 4);
-  ctx.translate(labelX + labelW / 2, 0);
-  ctx.rotate(Math.PI / 2);
-  ctx.fillStyle = game.golden ? "#ffd23f" : "#222";
-  ctx.textAlign = "center";
-  ctx.textBaseline = "middle";
-  ctx.font = `${Math.round(bodyW * 0.5)}px "Jua", sans-serif`;
-  ctx.fillText("璄", 0, -labelW * 0.12);
-  ctx.font = `${Math.round(bodyW * 0.17)}px "Jua", sans-serif`;
-  ctx.fillText("51%", 0, labelW * 0.28);
+  ctx.fillStyle = game.golden ? "#ffd23f" : "#7fd3f7";
+  ctx.fillRect(labelX + labelW * 0.2, -bodyW / 2 + 2, labelW * 0.12, bodyW - 4);
+  ctx.fillRect(labelX + labelW * 0.68, -bodyW / 2 + 2, labelW * 0.12, bodyW - 4);
   ctx.restore();
 }
 
@@ -1062,7 +1056,7 @@ function drawStream(g) {
   ctx.lineTo(endX + width * 0.3, endY);
   ctx.quadraticCurveTo(endX + width * 0.3, tip.y - width, tip.x + width / 2, tip.y);
   ctx.closePath();
-  ctx.fillStyle = "rgba(200, 238, 250, 0.9)";
+  ctx.fillStyle = "rgba(110, 200, 236, 0.9)";
   ctx.strokeStyle = "rgba(34, 34, 34, 0.5)";
   ctx.lineWidth = 1;
   ctx.fill();
@@ -1125,7 +1119,7 @@ function tapBottle() {
   if (game.bottleTaps.length >= 5) {
     game.bottleTaps = [];
     game.golden = !game.golden;
-    toast(game.golden ? "✨ 황금 병 발견! 기분만 51배 좋아진다." : "원래 병으로 돌아왔다.", "gold");
+    toast(game.golden ? "✨ 황금 병 발견! 기분만 두 배 좋아진다." : "원래 병으로 돌아왔다.", "gold");
   }
 }
 
