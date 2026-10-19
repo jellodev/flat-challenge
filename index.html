@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<title>찰랑찰랑 볼록 대작전</title>
+<meta name="description" content="한 방울도 흘리지 말고, 잔 위로 볼록하게. 할 수 있을까?">
+<meta property="og:title" content="찰랑찰랑 볼록 대작전">
+<meta property="og:description" content="한 방울도 흘리지 말고, 잔 위로 볼록하게. 할 수 있을까?">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#7fd3f7">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath d='M14 12h36l-5 44H19z' fill='%23fff' stroke='%23222' stroke-width='4'/%3E%3Cpath d='M15 12q17-9 34 0' fill='%23a8e3f5' stroke='%23222' stroke-width='3'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<main id="app">
+  <header class="hud">
+    <div class="badge">STAGE <span id="hudStage">1</span></div>
+    <div class="hud-cup" id="hudCup">소주잔</div>
+    <button class="icon-btn" id="muteBtn" aria-label="소리 끄기">🔊</button>
+  </header>
+
+  <div class="gauge" aria-hidden="true"><div class="gauge-fill" id="gaugeFill"></div><span>눈치 게이지</span></div>
+
+  <div class="stage" id="stage">
+    <canvas id="scene"></canvas>
+    <div class="toast-wrap" id="toasts" aria-live="polite"></div>
+    <div class="hint" id="hint">
+      <span class="touch-only">👈 화면을 끌어 병을 잔 위로 · 👉 꾹 버튼으로 따르기</span>
+      <span class="mouse-only">←→ 병 옮기기 · Space 꾹 따르기 · Enter 건배</span>
+    </div>
+  </div>
+
+  <footer class="controls">
+    <button class="pour-btn" id="pourBtn">꾹 따르기<kbd class="mouse-only">Space</kbd></button>
+    <button class="cheers-btn" id="cheersBtn">건배!<kbd class="mouse-only">Enter</kbd></button>
+  </footer>
+
+  <section class="overlay is-open" id="titleScreen">
+    <div class="card">
+      <h1><span>찰랑찰랑</span>볼록 대작전</h1>
+      <p class="lead">한 방울도 흘리지 말고<br>잔 위로 <b>볼록</b>하게!</p>
+      <div class="howto">
+        <div class="touch-only"><kbd>화면 끌기</kbd> 병을 잔 위로 옮기기</div>
+        <div class="touch-only"><kbd>꾹 따르기</kbd> 누르는 동안 졸졸</div>
+        <div class="touch-only"><kbd>건배!</kbd> 볼록해지면 누르기</div>
+        <div class="mouse-only"><kbd>← →</kbd> 병 옮기기 (마우스로 끌어도 OK)</div>
+        <div class="mouse-only"><kbd>Space</kbd> 누르는 동안 졸졸</div>
+        <div class="mouse-only"><kbd>Enter</kbd> 볼록해지면 건배!</div>
+        <div class="warn-line">한 방울이라도 흘리면… 처음부터.</div>
+      </div>
+      <div class="challenge" id="challengeBanner" hidden></div>
+      <button class="primary bounce" id="startBtn">START ▶</button>
+      <p class="best" id="bestRecord" hidden></p>
+      <p class="fine">19세 미만 음주 금지 · 기록은 매일 자정 초기화</p>
+    </div>
+  </section>
+
+  <section class="overlay" id="introScreen">
+    <div class="card">
+      <p class="eyebrow" id="introStep">STAGE 1</p>
+      <h2 id="introCup">소주잔</h2>
+      <p class="lead" id="introText"></p>
+      <button class="primary" id="goBtn">준비 완료!</button>
+    </div>
+  </section>
+
+  <section class="overlay" id="resultScreen">
+    <div class="card">
+      <p class="eyebrow" id="resultEyebrow"></p>
+      <h2 id="resultTitle"></h2>
+      <p class="lead" id="resultText"></p>
+      <div class="actions">
+        <button class="primary" id="resultPrimary"></button>
+        <button class="ghost" id="shareBtn">친구한테 도전장 보내기</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="overlay ending" id="endingScreen">
+    <div class="card" id="endingCard"></div>
+  </section>
+</main>
+<script src="game.js" type="module"></script>
+</body>
+</html>
